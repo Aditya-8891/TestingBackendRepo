@@ -1,0 +1,16 @@
+name: "yourchatbot"
+platform: "onnxruntime"
+input [
+  {
+    name: "input_ids"
+    data_type: TYPE_INT64
+    dims: [-1]
+  }
+]
+output [
+  {
+    name: "logits"
+    data_type: TYPE_FP32
+    dims: [-1, 50257]
+  }
+]
