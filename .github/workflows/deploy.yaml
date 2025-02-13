@@ -12,6 +12,17 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      - name: Add NVIDIA Repository
+        run: |
+          curl -fsSL https://nvidia.github.io/nvidia-container-runtime/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-runtime-keyring.gpg
+          distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+          echo "deb [signed-by=/usr/share/keyrings/nvidia-container-runtime-keyring.gpg] https://nvidia.github.io/libnvidia-container/stable/$distribution /" | sudo tee /etc/apt/sources.list.d/nvidia-container-runtime.list
+          sudo apt-get update
+
+      - name: Install NVIDIA Container Runtime
+        run: |
+          sudo apt-get install -y nvidia-container-runtime
+
       - name: Set Up NVIDIA Docker
         run: |
           sudo apt-get update
