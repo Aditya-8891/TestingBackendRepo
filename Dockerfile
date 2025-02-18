@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
 RUN pip3 install fastapi tritonclient[http] transformers numpy uvicorn gevent
 
 # Copy your model repository
-COPY /Users/adi-kewalram/adi-work/Honkai-Chatbot-Backend/TestingBackendRepo/model_repository /models
+COPY ./model_repository ./models
 
 # Set Triton server entrypoint
 ENTRYPOINT ["tritonserver", "--model-repository=/models", "--http-port=3000"]
