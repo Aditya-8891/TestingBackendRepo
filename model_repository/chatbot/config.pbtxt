@@ -1,4 +1,4 @@
-name: "yourchatbot"
+name: "textbot"
 platform: "onnxruntime"
 input [
   {

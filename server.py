@@ -2,14 +2,24 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 import tritonclient.http as hclient
 import numpy as np
 from transformers import AutoTokenizer
-
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 triton_url = "localhost:3000"
-model_name = "llama-2-7b"
+model_name = "gpt2"
 
 client = hclient.InferenceServerClient(url=triton_url)
-tokenizer = AutoTokenizer.from_pretrained("facebook/llama-2-7b")
+tokenizer = AutoTokenizer.from_pretrained("gpt2")
 
 #chat interface
 @app.websocket("/ws")
