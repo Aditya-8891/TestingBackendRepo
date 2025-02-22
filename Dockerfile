@@ -10,7 +10,9 @@ RUN apt-get update && apt-get install -y \
 RUN pip3 install fastapi tritonclient[http] transformers numpy uvicorn gevent
 
 # Copy your model repository
-COPY ./model_repository ./models
+COPY model_repository /models
+
+RUN ls -l /models
 
 # Set Triton server entrypoint
-ENTRYPOINT ["tritonserver", "--model-repository=/models", "--http-port=3000"]
+ENTRYPOINT ["tritonserver", "--model-repository=/model_repository", "--http-port=3000"]

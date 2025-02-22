@@ -2,7 +2,9 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 import tritonclient.http as hclient
 import numpy as np
 from transformers import AutoTokenizer
+
 from fastapi.middleware.cors import CORSMiddleware
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
 
 app = FastAPI()
 
@@ -13,7 +15,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 triton_url = "localhost:3000"
 model_name = "gpt2"

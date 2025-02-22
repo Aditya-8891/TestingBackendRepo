@@ -1,4 +1,4 @@
-name: "chatbot"
+name: "gpt2"
 platform: "onnxruntime_onnx"
 backend: "onnxruntime"
 
